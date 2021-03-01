@@ -1,0 +1,133 @@
+<!--	Título:		Calculadora Simples de Navegador
+		Versão: 	2
+		Autor:		Gabriel Costa Chaves
+		Conclusão:	14 de fevereiro de 2021
+-->		
+ <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Calculadora Simples</title>
+	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+	$(function(){
+		var concat = "";
+	    $("button").click(function(){
+	       	concat += $(this).text();	// Valor do botão...
+	        $("#valor").val(concat);	// Coloca valor no visor da calculadora...
+	        $("#valor").val();			// Pega o valor atual do visor da calculadora...
+	    });
+	    $("#resultado").click(function(){
+	        $("#valor").val(eval($("#valor").val()));
+	    });
+		// Entrada de dados por meio do teclado
+		$(document).keydown(function(evento) {
+			// Verifica se são números
+			for (var i = 48; i < 58; i++)
+			{
+				if (evento.which == i)
+				{
+					concat += String.fromCharCode(evento.which);
+					$("#valor").val(concat);			
+				}		
+			}
+			// Verifica se são outras teclas
+			switch (evento.which)
+			{
+				case 65:								// Adição
+					concat += " + ";
+					break;
+				case 83:								// Subtração
+					concat += " - ";
+					break;
+				case 77:								// Multiplicação
+					concat += " * ";
+					break;
+				case 68:								// Divisão
+					concat += " / ";
+					break;
+				case 8:									// Apagar
+					concat = concat.slice(0, -1);
+					break;
+				case 61:								// Calcular
+					concat = eval($("#valor").val());
+					break;
+				case 76:								// Limpar
+					concat = "";
+					break;
+			}		
+			$("#valor").val(concat);
+			console.log(evento.which);
+		});
+	});
+	</script>
+	<style>
+		button {
+			font-size:	20pt;
+			width:		100px;
+			height:		100px;
+			margin-top:	4px;
+			border:		2px solid;
+			transition:	ease-in 1s;
+		}
+		.num {
+			background-color:	#91e2cb;
+		}
+		.operador {
+			background-color:	#91c3e2;
+		}
+		#valor {
+			font-size:			20pt;
+			width:				303px;
+			height:				94px;
+			border:				2px solid;
+			background-color:	gold;
+		}	
+		#resultado {
+			font-size:	20pt;
+			width:		100px;
+			height:		100px;
+			background-color:	#82db7a;
+			border:		2px solid;
+			transition:	ease-in 1s;
+		}
+		#zero {
+			margin-left:	105px;
+		}
+		#divisao { margin-left:	104px; }
+		
+	</style>
+</head>
+<body>
+	<!-- Calculadora -->	
+	<div style="float: left">
+		<input type="text" id="valor" />
+		<input 	type="button" id="resultado" value="="/> <br>
+		<button type="button" class="num">7</button> 
+		<button type="button" class="num">8</button> 
+		<button type="button" class="num">9</button> 
+		<button type="button" class="operador">+</button> <br>
+		<button type="button" class="num">4</button> 
+		<button type="button" class="num">5</button> 
+		<button type="button" class="num">6</button> 
+		<button type="button" class="operador">-</button> <br>
+		<button type="button" class="num">1</button> 
+		<button type="button" class="num">2</button> 
+		<button type="button" class="num">3</button> 
+		<button type="button" class="operador">*</button> <br>
+		<button type="button" class="num" id="zero">0</button> 
+		<button type="button" class="operador" id="divisao">/</button> <br> 
+	</div>
+	<!-- Intruções para uso da calculadora por meio do teclado -->	
+	<p id="instrucoes">	
+		&emsp;Utilize o teclado físico se desejar 						<br>
+		&emsp;&emsp; · Adição: ---------	&lt;a&gt; 					<br>
+		&emsp;&emsp; · Subtração:-------	&lt;s&gt; 					<br>
+		&emsp;&emsp; · Multiplicação:---	&lt;m&gt; 					<br>
+		&emsp;&emsp; · Divisão:---------	&lt;d&gt; 					<br>
+		&emsp;&emsp; · Apagar:----------	&lt;<i>Backspace</i>&gt; 	<br>
+		&emsp;&emsp; · Calcular:--------	&lt;=&gt; 					<br>
+		&emsp;&emsp; · Limpar:----------	&lt;l&gt; 					<br>
+	</p>
+</body>
+</html> 
